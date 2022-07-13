@@ -6,6 +6,7 @@ public class AsteroidSpawner : MonoBehaviour
 {
     [SerializeField] GameObject asteroidPrefab;
     [SerializeField] float asteroidSpeed;
+    [SerializeField] float maxAsteroidSpeed = 6;
     [SerializeField] public static float asteroidXSpeed = -6;
     float timeBeforeSpawn = 1;
 
@@ -19,15 +20,23 @@ public class AsteroidSpawner : MonoBehaviour
         {
             SpawnAsteroid();
         }
+
+        if (asteroidSpeed < maxAsteroidSpeed)
+        {
+            asteroidSpeed *= 1.00001f;
+            asteroidXSpeed *= 1.00001f;
+
+        }
     }
 
     void SpawnAsteroid()
     {
         int dirMult = Random.Range(0, 2) == 0 ? -1 : 1;
-        float spawnX = Random.Range(5, 9);
+        float spawnX = Random.Range(6.5f, 12.5f);
         float spawnY = dirMult == -1 ? 5 : -5;
         GameObject asteroid = Instantiate(asteroidPrefab, new Vector3(spawnX, spawnY, 0), Quaternion.identity);
-        asteroid.GetComponent<Asteroid>().SetSpeed(asteroidSpeed * dirMult);
+        float asteroidSpeedAdj = Random.Range(0.9f, 1.1f);
+        asteroid.GetComponent<Asteroid>().SetSpeed(asteroidSpeed * asteroidSpeedAdj * dirMult);
 
 
 

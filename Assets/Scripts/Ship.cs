@@ -5,7 +5,8 @@ using UnityEngine;
 public class Ship : MonoBehaviour
 {
     public float speed = 3.0f;
-    
+    [SerializeField] float moveBoundary = 5;
+
     void Update()
     {
         if (GameManager.paused)
@@ -26,6 +27,10 @@ public class Ship : MonoBehaviour
 
     void Move(float moveAmt)
     {
+        Vector3 newPos = transform.position + new Vector3(0, moveAmt, 0);
+        if (Mathf.Abs(newPos.y) > moveBoundary)
+            return;
+
         transform.position += new Vector3(0, moveAmt, 0);
     }
 
