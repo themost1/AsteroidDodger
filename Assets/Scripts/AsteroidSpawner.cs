@@ -11,6 +11,9 @@ public class AsteroidSpawner : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.paused)
+            return;
+        
         timeBeforeSpawn -= Time.deltaTime;
         if (timeBeforeSpawn <= 0)
         {

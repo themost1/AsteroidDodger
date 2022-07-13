@@ -8,6 +8,9 @@ public class Ship : MonoBehaviour
     
     void Update()
     {
+        if (GameManager.paused)
+            return;
+        
         float moveAmt = 0;
         if (Input.GetKey(KeyCode.UpArrow))
         {
@@ -24,5 +27,11 @@ public class Ship : MonoBehaviour
     void Move(float moveAmt)
     {
         transform.position += new Vector3(0, moveAmt, 0);
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Asteroid")
+            GameManager.OnLoss();
     }
 }

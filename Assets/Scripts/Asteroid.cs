@@ -8,6 +8,9 @@ public class Asteroid : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.paused)
+            return;
+        
         transform.position += new Vector3(AsteroidSpawner.asteroidXSpeed, speed, 0) * Time.deltaTime;
         if (transform.position.x < -10)
             Destroy(gameObject);

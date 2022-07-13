@@ -10,6 +10,9 @@ public class Background : MonoBehaviour
     
     void Update()
     {
+        if (GameManager.paused)
+            return;
+
         img.uvRect = new Rect(img.uvRect.position + new Vector2(x, y) * Time.deltaTime, img.uvRect.size);
     }
 }
