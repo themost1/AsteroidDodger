@@ -10,10 +10,17 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (paused && Input.GetKeyDown(KeyCode.R))
-            Restart();
+        if (paused)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+                Restart();
+
+            return;
+        }
         
         currScore += Time.deltaTime;
+        if (currScore > highScore)
+            highScore = currScore;
     }
 
     public static void OnLoss()
@@ -33,5 +40,7 @@ public class GameManager : MonoBehaviour
         GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
         foreach (GameObject asteroid in asteroids)
             Destroy(asteroid);
+
+        GameObject.Find("Ship").transform.rotation = Quaternion.identity;
     }
 }

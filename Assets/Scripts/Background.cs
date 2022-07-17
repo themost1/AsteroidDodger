@@ -8,6 +8,12 @@ public class Background : MonoBehaviour
     [SerializeField] private RawImage img;
     [SerializeField] private float x, y;
     
+    void Start()
+    {
+        float scaleElement = 12 * Screen.width / 1920;
+        transform.localScale = new Vector3(scaleElement, scaleElement, 1);
+    }
+
     void Update()
     {
         if (GameManager.paused)
